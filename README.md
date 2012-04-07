@@ -16,12 +16,13 @@ Chilly front end script takes care of ajax requests and broadcasting updates. An
 ## Installation ##
 
 * Download and [install Node.js](https://github.com/joyent/node/wiki/Installation)  on your platform of choice.
-* Download Chilly Framework
+* Download Chilly Framework, using for instance `git clone https://github.com/TajPelc/Chilly-Framework.git` or by [downloading a zip](https://github.com/TajPelc/Chilly-Framework/zipball/master).
 * You are ready to go, start the server with `node server.js` from the folder where you extracted the files.
 
 ## Structure ##
 This is a basic structure for a Chilly Framework project. It's separated to a back (protected) and a front end (public).
-<pre>
+
+```
 framework
   chilly-0.2.js     // Chilly Framework back end script
 node_modules        // additional Node.js modules
@@ -37,10 +38,12 @@ public              // static content served by the web server
   css
   img
 server.js           // starts the server
-</pre>
+```
 
 ## How to use it ##
-**Front end**
+
+
+###Front end###
 ______________________________________________
 
 Start by creating an index.html file in `/public/index.html`, then run the server with `node server.js`. Navigate to `http://localhost:3000/` and you should see the contents of the file.
@@ -50,17 +53,21 @@ Include the Chilly Framework front end library with `<script src="/js/libraries/
 To start Chilly Framework call `Chilly.init();`. This triggers an `init` event.
 
 To bind events use:
-<pre>
-Chilly.bind('init', function(e) { ... // load assets, sprites, sounds, etc });
-</pre>
+
+```javascript
+Chilly.bind('init', function(e) { ... /* load assets, sprites, sounds, etc */ });
+```
+
 
 To trigger custom events use:
-<pre>
+
+```javascript
 Chilly.trigger('eventName', customData);
-</pre>
+```
 
 To issue request to the back-end use:
-<pre>
+
+```javascript
 Chilly.request('actionName', {
   data: { // optional
     custom1: 'a',
@@ -73,32 +80,37 @@ Chilly.request('actionName', {
      ... // display errors
   }
 });
-</pre>
+```
 
 Define code for every action that is transmitted over the update channel using:
-<pre>
+
+```javascript
 Chilly.onUpdate('gameOver', function(data) {
    ... // display the score
 });
-</pre>
+```
 
 Listen to additional channels created on the back end using:
-<pre>
+
+```javascript
 Chilly.listen('chat', function(data){
   ... // display broadcasted message
 });
-</pre>
+```
 
-**Back end**
+
+###Back end###
 ______________________________________________
 
 Open `actions.js` and define additional update channels with:
-<pre>
+
+```javascript
 Chilly.createChannel('chat');
-</pre>
+```
 
 Open `actions.js` and define responses to requests send from the front end by `Chilly.request` with:
-<pre>
+
+```javascript
 Chilly.action('login', {
     user: function(request) { // if user is already logged in
         ... // respond with an error
@@ -109,7 +121,7 @@ Chilly.action('login', {
         request.respond.ok('You are now logged in.');
     }
 });
-</pre>
+```
 
 Open `models.js` and extend Game.js and define your own models that will be used by the game.
 
