@@ -1,13 +1,28 @@
 {
-  "name": "Chilly",
-  "description": "A platform for multiplayer HTML5 games",
-  "keywords": [
-    "games", "multiplayer"
-  ],
-  "author": "Taj Pelc",
-  "version": "0.2",
-  "main": "./server.js",
-  "dependencies": {
-    "connect": ">=1.8.6",
-  }
+    "name": "chilly",
+    "version": "0.2.0",
+    "author": "Taj Pelc <info@chillyframework.com>",
+    "description": "A platform for multiplayer HTML5 games",
+    "keywords": [
+        "games",
+        "multiplayer",
+        "server",
+        "static",
+        "sync"
+    ],
+    "main": "./server.js",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:TajPelc/Chilly-Framework.git"
+    },
+    "dependencies": {
+        "connect": ">=1.8.6"
+    },
+    "license": [
+        "MIT",
+        "GPLv2"
+    ],
+    "engine": {
+        "node": ">=0.6"
+    }
 }
