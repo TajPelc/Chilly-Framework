@@ -55,7 +55,7 @@ To start Chilly Framework call `Chilly.init();`. This triggers an `init` event.
 To bind events use:
 
 ```javascript
-Chilly.bind('init', function(e) { ... // load assets, sprites, sounds, etc });
+Chilly.bind('init', function(e) { ... /* load assets, sprites, sounds, etc */ });
 ```
 
 
