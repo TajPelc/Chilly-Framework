@@ -1,0 +1,13 @@
+{
+  "name": "Chilly",
+  "description": "A platform for multiplayer HTML5 games",
+  "keywords": [
+    "games", "multiplayer"
+  ],
+  "author": "Taj Pelc",
+  "version": "0.2",
+  "main": "./server.js",
+  "dependencies": {
+    "connect": ">=1.8.6",
+  }
+}
