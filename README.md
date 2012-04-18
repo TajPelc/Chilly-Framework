@@ -50,14 +50,15 @@ Start by creating an index.html file in `/public/index.html`, then run the serve
 
 Include the Chilly Framework front end library with `<script src="/js/libraries/chilly-0.2.js" />`. Create your own JavaScript file, for example game.js and include it.
 
-To start Chilly Framework call `Chilly.init();`. This triggers an `init` event.
+To start Chilly Framework call `Chilly.init();`, it should be called only after the windows has loaded. This triggers an `init` event.
+
+To start listening for updates on all defined channels (add the default called update), call `Chilly.connect()`.
 
 To bind events use:
 
 ```javascript
 Chilly.bind('init', function(e) { ... /* load assets, sprites, sounds, etc */ });
 ```
-
 
 To trigger custom events use:
 
@@ -105,7 +106,7 @@ ______________________________________________
 Open `actions.js` and define additional update channels with:
 
 ```javascript
-Chilly.createChannel('chat');
+Chilly.createChannel('channelName');
 ```
 
 Open `actions.js` and define responses to requests send from the front end by `Chilly.request` with:
