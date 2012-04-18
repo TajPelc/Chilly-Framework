@@ -1,5 +1,5 @@
 /*
- * Chilly Framework v0.2: JavaScript Library
+ * Chilly Framework v0.2.1: JavaScript Library
  * http://chillyframework.com/
  *
  * Chilly front end
@@ -15,7 +15,7 @@
      * Chilly framework front-end core
      */
     window.Chilly = (function() {
-        var listeners = {}, // game listeners
+        var channels = {}, // game channels
             actions = {}, // actions
             handlers = {}; // event handlers
 
@@ -178,12 +178,12 @@
              */
             listen: function(channel, fnc) {
                 var that = this;
-                listeners[channel] = (function(data) {
+                channels[channel] = (function(data) {
                     return function() {
                         that.request(channel, {
                             success: function(rv) {
                                 data.call(that, rv.data);
-                                listeners[channel](); // reconnect
+                                channels[channel](); // reconnect
                             }
                         });
                     };
@@ -193,17 +193,14 @@
             /**
              * Start long polling for updates
              */
-            longPoll: function() {
-                var startListeners = function(){
-                    // start all the listeners
-                    for(var name in listeners) {
-                        if(listeners.hasOwnProperty(name)){
-                            listeners[name]();
+            connect: function() {
+                setTimeout(function() {
+                    for(var name in channels) {
+                        if(channels.hasOwnProperty(name)){
+                            channels[name]();
                         }
                     }
-                };
-
-                setTimeout(startListeners, 500);
+                }, 500);
             },
 
             /**

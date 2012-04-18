@@ -1,5 +1,5 @@
 /*
- * Chilly Framework v0.2: JavaScript Library
+ * Chilly Framework v0.2.1: JavaScript Library
  * http://chillyframework.com/
  *
  * Chilly back end

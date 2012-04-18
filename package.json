@@ -1,6 +1,6 @@
 {
     "name": "chilly",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "author": "Taj Pelc <info@chillyframework.com>",
     "description": "A platform for multiplayer HTML5 games",
     "keywords": [
