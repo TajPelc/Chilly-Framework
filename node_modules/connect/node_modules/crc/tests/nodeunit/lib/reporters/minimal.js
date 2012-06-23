@@ -11,7 +11,7 @@
 var nodeunit = require('../nodeunit'),
     utils = require('../utils'),
     fs = require('fs'),
-    sys = require('sys'),
+    util = require('util'),
     path = require('path'),
     AssertionError = require('assert').AssertionError;
 
@@ -58,21 +58,21 @@ exports.run = function (files, options) {
 
     nodeunit.runFiles(paths, {
         moduleStart: function (name) {
-            sys.print(bold(name) + ': ');
+            util.print(bold(name) + ': ');
         },
         moduleDone: function (name, assertions) {
-            sys.puts('');
+            util.puts('');
             if (assertions.failures()) {
                 assertions.forEach(function (a) {
                     if (a.failed()) {
                         a = utils.betterErrors(a);
                         if (a.error instanceof AssertionError && a.message) {
-                            sys.puts(
+                            util.puts(
                                 'Assertion in test ' + bold(a.testname) + ': ' +
                                 magenta(a.message)
                             );
                         }
-                        sys.puts(a.error.stack + '\n');
+                        util.puts(a.error.stack + '\n');
                     }
                 });
             }
@@ -82,10 +82,10 @@ exports.run = function (files, options) {
         },
         testDone: function (name, assertions) {
             if (!assertions.failures()) {
-                sys.print('.');
+                util.print('.');
             }
             else {
-                sys.print(red('F'));
+                util.print(red('F'));
                 assertions.forEach(function (assertion) {
                     assertion.testname = name;
                 });
@@ -95,14 +95,14 @@ exports.run = function (files, options) {
             var end = new Date().getTime();
             var duration = end - start;
             if (assertions.failures()) {
-                sys.puts(
+                util.puts(
                     '\n' + bold(red('FAILURES: ')) + assertions.failures() +
                     '/' + assertions.length + ' assertions failed (' +
                     assertions.duration + 'ms)'
                 );
             }
             else {
-                sys.puts(
+                util.puts(
                     '\n' + bold(green('OK: ')) + assertions.length +
                     ' assertions (' + assertions.duration + 'ms)'
                 );
