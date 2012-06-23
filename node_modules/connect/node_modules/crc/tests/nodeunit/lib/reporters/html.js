@@ -11,7 +11,7 @@
 var nodeunit = require('../nodeunit'),
     utils = require('../utils'),
     fs = require('fs'),
-    sys = require('sys'),
+    util = require('util'),
     path = require('path'),
     AssertionError = require('assert').AssertionError;
 
@@ -35,72 +35,72 @@ exports.run = function (files, options) {
         return path.join(process.cwd(), p);
     });
 
-    sys.puts('<html>');
-    sys.puts('<head>');
-    sys.puts('<title></title>');
-    sys.puts('<style type="text/css">');
-    sys.puts('body { font: 12px Helvetica Neue }');
-    sys.puts('h2 { margin:0 ; padding:0 }');
-    sys.puts('pre { font: 11px Andale Mono; margin-left: 1em; padding-left: 1em; margin-top:0; font-size:smaller;}');
-    sys.puts('.assertion_message { margin-left: 1em; }');
-    sys.puts('  ol {' +
+    util.puts('<html>');
+    util.puts('<head>');
+    util.puts('<title></title>');
+    util.puts('<style type="text/css">');
+    util.puts('body { font: 12px Helvetica Neue }');
+    util.puts('h2 { margin:0 ; padding:0 }');
+    util.puts('pre { font: 11px Andale Mono; margin-left: 1em; padding-left: 1em; margin-top:0; font-size:smaller;}');
+    util.puts('.assertion_message { margin-left: 1em; }');
+    util.puts('  ol {' +
     '	list-style: none;' +
     '	margin-left: 1em;' +
     '	padding-left: 1em;' +
     '	text-indent: -1em;' +
     '}');
-    sys.puts('  ol li.pass:before { content: "\\2714 \\0020"; }');
-    sys.puts('  ol li.fail:before { content: "\\2716 \\0020"; }');
-    sys.puts('</style>');
-    sys.puts('</head>');
-    sys.puts('<body>');
+    util.puts('  ol li.pass:before { content: "\\2714 \\0020"; }');
+    util.puts('  ol li.fail:before { content: "\\2716 \\0020"; }');
+    util.puts('</style>');
+    util.puts('</head>');
+    util.puts('<body>');
     nodeunit.runFiles(paths, {
         moduleStart: function (name) {
-            sys.puts('<h2>' + name + '</h2>');
-            sys.puts('<ol>');
+            util.puts('<h2>' + name + '</h2>');
+            util.puts('<ol>');
         },
         testDone: function (name, assertions) {
             if (!assertions.failures()) {
-                sys.puts('<li class="pass">' + name + '</li>');
+                util.puts('<li class="pass">' + name + '</li>');
             }
             else {
-                sys.puts('<li class="fail">' + name);
+                util.puts('<li class="fail">' + name);
                 assertions.forEach(function (a) {
                     if (a.failed()) {
                         a = utils.betterErrors(a);
                         if (a.error instanceof AssertionError && a.message) {
-                            sys.puts('<div class="assertion_message">' +
+                            util.puts('<div class="assertion_message">' +
                                 'Assertion Message: ' + a.message +
                             '</div>');
                         }
-                        sys.puts('<pre>');
-                        sys.puts(a.error.stack);
-                        sys.puts('</pre>');
+                        util.puts('<pre>');
+                        util.puts(a.error.stack);
+                        util.puts('</pre>');
                     }
                 });
-                sys.puts('</li>');
+                util.puts('</li>');
             }
         },
         moduleDone: function () {
-            sys.puts('</ol>');
+            util.puts('</ol>');
         },
         done: function (assertions) {
             var end = new Date().getTime();
             var duration = end - start;
             if (assertions.failures()) {
-                sys.puts(
+                util.puts(
                     '<h3>FAILURES: '  + assertions.failures() +
                     '/' + assertions.length + ' assertions failed (' +
                     assertions.duration + 'ms)</h3>'
                 );
             }
             else {
-                sys.puts(
+                util.puts(
                     '<h3>OK: ' + assertions.length +
                     ' assertions (' + assertions.duration + 'ms)</h3>'
                 );
             }
-            sys.puts('</body>');
+            util.puts('</body>');
             // should be able to flush stdout here, but doesn't seem to work,
             // instead delay the exit to give enough to time flush.
             setTimeout(function () {
