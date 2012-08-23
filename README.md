@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/TajPelc/Chilly-Framework.png)](http://travis-ci.org/TajPelc/Chilly-Framework)
 # Chilly Framework #
 ## About ##
 
